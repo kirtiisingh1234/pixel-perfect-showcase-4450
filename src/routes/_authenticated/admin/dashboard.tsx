@@ -24,7 +24,7 @@ function AdminDashboard() {
         return [t, count ?? 0] as const;
       }));
       const { data: apps } = await supabase.from("applications").select("status");
-      return { counts: Object.fromEntries(counts) as Record<string, number>, apps: apps ?? [] };
+      return { counts: Object.fromEntries(counts) as Record<(typeof tables)[number], number>, apps: apps ?? [] };
     },
   });
   const c = data?.counts;

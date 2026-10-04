@@ -14,7 +14,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { EmptyState, LoadingState } from "@/components/AppShell";
 
 export type ResourceTable = "skills" | "certificates" | "internships" | "applications";
-export type Row = Record<string, any> & { id: string };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Row = any;
 
 export type Field = {
   name: string;
