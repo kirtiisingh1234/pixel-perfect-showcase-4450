@@ -21,7 +21,7 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState<Record<string, any>>({});
+  const [errors, setErrors] = useState<any>({});
   const [loading, setLoading] = useState(false);
 
   async function submit(e: React.FormEvent) {

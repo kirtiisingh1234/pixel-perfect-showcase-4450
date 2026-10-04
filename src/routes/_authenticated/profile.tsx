@@ -30,7 +30,7 @@ function ProfilePage() {
   const avatar = useAvatarUrl(p?.avatar_url);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ full_name: "", phone: "", college: "", course: "", year: "" });
-  const [errors, setErrors] = useState<Record<string, any>>({});
+  const [errors, setErrors] = useState<any>({});
 
   useEffect(() => {
     if (p) setForm({ full_name: p.full_name, phone: p.phone ?? "", college: p.college ?? "", course: p.course ?? "", year: p.year ?? "" });

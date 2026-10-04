@@ -24,7 +24,7 @@ const empty = { full_name: "", email: "", password: "", phone: "", college: "", 
 function RegisterPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState(empty);
-  const [errors, setErrors] = useState<Record<string, any>>({});
+  const [errors, setErrors] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const set = (k: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
