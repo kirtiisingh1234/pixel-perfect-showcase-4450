@@ -4,8 +4,16 @@ import { GraduationCap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function AuthCard({ title, subtitle, children, footer }: {
-  title: string; subtitle: string; children: ReactNode; footer?: ReactNode;
+export function AuthCard({
+  title,
+  subtitle,
+  children,
+  footer,
+}: {
+  title: string;
+  subtitle: string;
+  children: ReactNode;
+  footer?: ReactNode;
 }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-soft px-4 py-10">
@@ -27,8 +35,15 @@ export function AuthCard({ title, subtitle, children, footer }: {
   );
 }
 
-export function FormField({ id, label, error, ...props }: {
-  id: string; label: string; error?: string | undefined;
+export function FormField({
+  id,
+  label,
+  error,
+  ...props
+}: {
+  id: string;
+  label: string;
+  error?: string | undefined;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="space-y-1.5">

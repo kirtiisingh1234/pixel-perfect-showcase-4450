@@ -31,8 +31,14 @@ function LoginPage() {
     setErrors({});
     setLoading(true);
     const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
-    if (error) { setLoading(false); return toast.error("Invalid email or password"); }
-    const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+    if (error) {
+      setLoading(false);
+      return toast.error("Invalid email or password");
+    }
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", data.user.id);
     setLoading(false);
     if (roles?.some((r) => r.role === "admin")) {
       await supabase.auth.signOut();
@@ -43,14 +49,42 @@ function LoginPage() {
   }
 
   return (
-    <AuthCard title="Student Login" subtitle="Sign in to continue your journey."
-      footer={<>New here? <Link to="/register" className="font-medium text-primary">Create an account</Link> · <Link to="/admin/login" className="font-medium text-primary">Admin login</Link></>}>
+    <AuthCard
+      title="Student Login"
+      subtitle="Sign in to continue your journey."
+      footer={
+        <>
+          New here?{" "}
+          <Link to="/register" className="font-medium text-primary">
+            Create an account
+          </Link>{" "}
+          ·{" "}
+          <Link to="/admin/login" className="font-medium text-primary">
+            Admin login
+          </Link>
+        </>
+      }
+    >
       <form onSubmit={submit} className="space-y-4" noValidate>
-        <FormField id="email" label="Email" type="email" value={form.email} error={errors.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} />
-        <FormField id="password" label="Password" type="password" value={form.password} error={errors.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })} />
-        <Button type="submit" className="w-full" disabled={loading}>{loading ? "Signing in…" : "Sign in"}</Button>
+        <FormField
+          id="email"
+          label="Email"
+          type="email"
+          value={form.email}
+          error={errors.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+        <FormField
+          id="password"
+          label="Password"
+          type="password"
+          value={form.password}
+          error={errors.password}
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        />
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? "Signing in…" : "Sign in"}
+        </Button>
       </form>
     </AuthCard>
   );

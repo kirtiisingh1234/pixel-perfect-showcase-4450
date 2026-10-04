@@ -2,7 +2,16 @@ import { Link, useNavigate, useRouteContext } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
-  LayoutDashboard, User, Sparkles, Award, Briefcase, Send, LogOut, Users, GraduationCap, ShieldCheck,
+  LayoutDashboard,
+  User,
+  Sparkles,
+  Award,
+  Briefcase,
+  Send,
+  LogOut,
+  Users,
+  GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -21,8 +30,16 @@ const adminNav = [
   { to: "/admin/students", label: "Students", icon: Users },
 ] as const;
 
-export function AppShell({ title, subtitle, actions, children }: {
-  title: string; subtitle?: string; actions?: ReactNode; children: ReactNode;
+export function AppShell({
+  title,
+  subtitle,
+  actions,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  actions?: ReactNode;
+  children: ReactNode;
 }) {
   const { user, isAdmin } = useRouteContext({ from: "/_authenticated" });
   const navigate = useNavigate();
@@ -45,7 +62,9 @@ export function AppShell({ title, subtitle, actions, children }: {
           </div>
           <div>
             <p className="font-display text-lg font-bold leading-none">SkillTrack</p>
-            <p className="text-xs text-muted-foreground">{isAdmin ? "Admin Panel" : "Student Portal"}</p>
+            <p className="text-xs text-muted-foreground">
+              {isAdmin ? "Admin Panel" : "Student Portal"}
+            </p>
           </div>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-col md:overflow-visible">
@@ -85,7 +104,15 @@ export function AppShell({ title, subtitle, actions, children }: {
   );
 }
 
-export function StatCard({ label, value, icon: Icon }: { label: string; value: number | string; icon: typeof User }) {
+export function StatCard({
+  label,
+  value,
+  icon: Icon,
+}: {
+  label: string;
+  value: number | string;
+  icon: typeof User;
+}) {
   return (
     <div className="rounded-2xl border bg-card p-5 shadow-card">
       <div className="flex items-center justify-between">
@@ -108,7 +135,11 @@ export function EmptyState({ text }: { text: string }) {
 }
 
 export function LoadingState() {
-  return <div className="rounded-2xl border bg-card p-10 text-center text-sm text-muted-foreground">Loading…</div>;
+  return (
+    <div className="rounded-2xl border bg-card p-10 text-center text-sm text-muted-foreground">
+      Loading…
+    </div>
+  );
 }
 
 const statusTone: Record<string, string> = {
@@ -124,7 +155,9 @@ const statusTone: Record<string, string> = {
 
 export function StatusBadge({ status }: { status: string }) {
   return (
-    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusTone[status] ?? "bg-muted text-muted-foreground"}`}>
+    <span
+      className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusTone[status] ?? "bg-muted text-muted-foreground"}`}
+    >
       {status}
     </span>
   );

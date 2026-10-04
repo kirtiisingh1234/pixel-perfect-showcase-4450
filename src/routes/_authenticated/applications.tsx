@@ -4,12 +4,28 @@ import { ResourceManager } from "@/components/ResourcePage";
 import { APPLICATION_STATUS, applicationSchema } from "@/lib/schemas";
 
 export const Route = createFileRoute("/_authenticated/applications")({
-  head: () => ({ meta: [{ title: "My Applications — SkillTrack" }, { name: "description", content: "Track internship applications." }] }),
+  head: () => ({
+    meta: [
+      { title: "My Applications — SkillTrack" },
+      { name: "description", content: "Track internship applications." },
+    ],
+  }),
   component: () => (
-    <AppShell title="Internship Applications" subtitle="Track every application and update its status.">
+    <AppShell
+      title="Internship Applications"
+      subtitle="Track every application and update its status."
+    >
       <ResourceManager
-        table="applications" singular="Application" schema={applicationSchema}
-        defaults={{ company: "", role: "", applied_date: new Date().toISOString().slice(0, 10), status: "Applied", notes: "" }}
+        table="applications"
+        singular="Application"
+        schema={applicationSchema}
+        defaults={{
+          company: "",
+          role: "",
+          applied_date: new Date().toISOString().slice(0, 10),
+          status: "Applied",
+          notes: "",
+        }}
         fields={[
           { name: "company", label: "Company Name", type: "text" },
           { name: "role", label: "Role", type: "text" },
@@ -22,7 +38,9 @@ export const Route = createFileRoute("/_authenticated/applications")({
             {APPLICATION_STATUS.map((s) => (
               <div key={s} className="rounded-2xl border bg-card p-4 shadow-card">
                 <StatusBadge status={s} />
-                <p className="mt-2 text-2xl font-bold">{rows.filter((r) => r.status === s).length}</p>
+                <p className="mt-2 text-2xl font-bold">
+                  {rows.filter((r) => r.status === s).length}
+                </p>
               </div>
             ))}
           </div>
@@ -32,12 +50,21 @@ export const Route = createFileRoute("/_authenticated/applications")({
           { label: "Role", render: (r) => r.role },
           { label: "Applied", render: (r) => r.applied_date },
           { label: "Status", render: (r) => <StatusBadge status={r.status} /> },
-          { label: "Update Status", render: (r, update) => (
-            <select aria-label="Update status" value={r.status} onChange={(e) => update({ status: e.target.value })}
-              className="h-8 rounded-md border border-input bg-card px-2 text-sm">
-              {APPLICATION_STATUS.map((s) => <option key={s}>{s}</option>)}
-            </select>
-          ) },
+          {
+            label: "Update Status",
+            render: (r, update) => (
+              <select
+                aria-label="Update status"
+                value={r.status}
+                onChange={(e) => update({ status: e.target.value })}
+                className="h-8 rounded-md border border-input bg-card px-2 text-sm"
+              >
+                {APPLICATION_STATUS.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
+            ),
+          },
         ]}
       />
     </AppShell>

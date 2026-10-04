@@ -1,15 +1,40 @@
 import { z } from "zod";
 
 export const PROFICIENCY = ["Beginner", "Intermediate", "Advanced", "Expert"] as const;
-export const SKILL_CATEGORIES = ["Programming", "Web Development", "Database", "Data Science", "Design", "Soft Skills", "Other"] as const;
+export const SKILL_CATEGORIES = [
+  "Programming",
+  "Web Development",
+  "Database",
+  "Data Science",
+  "Design",
+  "Soft Skills",
+  "Other",
+] as const;
 export const INTERNSHIP_TYPES = ["Remote", "On-site", "Hybrid"] as const;
 export const INTERNSHIP_STATUS = ["Upcoming", "Ongoing", "Completed"] as const;
-export const APPLICATION_STATUS = ["Applied", "Shortlisted", "Interview", "Selected", "Rejected"] as const;
+export const APPLICATION_STATUS = [
+  "Applied",
+  "Shortlisted",
+  "Interview",
+  "Selected",
+  "Rejected",
+] as const;
 export const YEARS = ["FY", "SY", "TY"] as const;
 
 const req = (label: string, max = 100) =>
-  z.string().trim().min(1, `${label} is required`).max(max, `${label} must be under ${max} characters`);
-const optUrl = z.string().trim().max(500).refine((v) => v === "" || /^https?:\/\/.+/.test(v), "Enter a valid URL starting with http(s)://");
+  z
+    .string()
+    .trim()
+    .min(1, `${label} is required`)
+    .max(max, `${label} must be under ${max} characters`);
+const optUrl = z
+  .string()
+  .trim()
+  .max(500)
+  .refine(
+    (v) => v === "" || /^https?:\/\/.+/.test(v),
+    "Enter a valid URL starting with http(s)://",
+  );
 const optDate = z.string().refine((v) => v === "" || !isNaN(Date.parse(v)), "Invalid date");
 
 export const passwordSchema = z
@@ -22,7 +47,10 @@ export const registerSchema = z.object({
   full_name: req("Full name"),
   email: z.string().trim().email("Enter a valid email").max(255),
   password: passwordSchema,
-  phone: z.string().trim().regex(/^[0-9]{10}$/, "Phone must be 10 digits"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[0-9]{10}$/, "Phone must be 10 digits"),
   college: req("College", 150),
   course: req("Course"),
   year: z.enum(YEARS, { errorMap: () => ({ message: "Select a year" }) }),
@@ -39,7 +67,11 @@ export const skillSchema = z.object({
   name: req("Skill name", 60),
   category: z.enum(SKILL_CATEGORIES),
   proficiency: z.enum(PROFICIENCY),
-  progress: z.coerce.number({ invalid_type_error: "Progress is required" }).int().min(0, "Minimum 0").max(100, "Maximum 100"),
+  progress: z.coerce
+    .number({ invalid_type_error: "Progress is required" })
+    .int()
+    .min(0, "Minimum 0")
+    .max(100, "Maximum 100"),
 });
 
 export const certificateSchema = z.object({

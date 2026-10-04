@@ -1,381 +1,369 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.18"
-  }
+    PostgrestVersion: "14.18";
+  };
   public: {
     Tables: {
       applications: {
         Row: {
-          applied_date: string
-          company: string
-          created_at: string
-          id: string
-          notes: string | null
-          role: string
-          status: string
-          student_id: string
-        }
+          applied_date: string;
+          company: string;
+          created_at: string;
+          id: string;
+          notes: string | null;
+          role: string;
+          status: string;
+          student_id: string;
+        };
         Insert: {
-          applied_date?: string
-          company: string
-          created_at?: string
-          id?: string
-          notes?: string | null
-          role: string
-          status?: string
-          student_id: string
-        }
+          applied_date?: string;
+          company: string;
+          created_at?: string;
+          id?: string;
+          notes?: string | null;
+          role: string;
+          status?: string;
+          student_id: string;
+        };
         Update: {
-          applied_date?: string
-          company?: string
-          created_at?: string
-          id?: string
-          notes?: string | null
-          role?: string
-          status?: string
-          student_id?: string
-        }
+          applied_date?: string;
+          company?: string;
+          created_at?: string;
+          id?: string;
+          notes?: string | null;
+          role?: string;
+          status?: string;
+          student_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "applications_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "students"
-            referencedColumns: ["id"]
+            foreignKeyName: "applications_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       certificates: {
         Row: {
-          created_at: string
-          credential_id: string | null
-          id: string
-          issue_date: string | null
-          name: string
-          organization: string
-          student_id: string
-          url: string | null
-        }
+          created_at: string;
+          credential_id: string | null;
+          id: string;
+          issue_date: string | null;
+          name: string;
+          organization: string;
+          student_id: string;
+          url: string | null;
+        };
         Insert: {
-          created_at?: string
-          credential_id?: string | null
-          id?: string
-          issue_date?: string | null
-          name: string
-          organization: string
-          student_id: string
-          url?: string | null
-        }
+          created_at?: string;
+          credential_id?: string | null;
+          id?: string;
+          issue_date?: string | null;
+          name: string;
+          organization: string;
+          student_id: string;
+          url?: string | null;
+        };
         Update: {
-          created_at?: string
-          credential_id?: string | null
-          id?: string
-          issue_date?: string | null
-          name?: string
-          organization?: string
-          student_id?: string
-          url?: string | null
-        }
+          created_at?: string;
+          credential_id?: string | null;
+          id?: string;
+          issue_date?: string | null;
+          name?: string;
+          organization?: string;
+          student_id?: string;
+          url?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "certificates_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "students"
-            referencedColumns: ["id"]
+            foreignKeyName: "certificates_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       internships: {
         Row: {
-          company: string
-          created_at: string
-          description: string | null
-          end_date: string | null
-          id: string
-          internship_type: string
-          role: string
-          start_date: string | null
-          status: string
-          student_id: string
-        }
+          company: string;
+          created_at: string;
+          description: string | null;
+          end_date: string | null;
+          id: string;
+          internship_type: string;
+          role: string;
+          start_date: string | null;
+          status: string;
+          student_id: string;
+        };
         Insert: {
-          company: string
-          created_at?: string
-          description?: string | null
-          end_date?: string | null
-          id?: string
-          internship_type?: string
-          role: string
-          start_date?: string | null
-          status?: string
-          student_id: string
-        }
+          company: string;
+          created_at?: string;
+          description?: string | null;
+          end_date?: string | null;
+          id?: string;
+          internship_type?: string;
+          role: string;
+          start_date?: string | null;
+          status?: string;
+          student_id: string;
+        };
         Update: {
-          company?: string
-          created_at?: string
-          description?: string | null
-          end_date?: string | null
-          id?: string
-          internship_type?: string
-          role?: string
-          start_date?: string | null
-          status?: string
-          student_id?: string
-        }
+          company?: string;
+          created_at?: string;
+          description?: string | null;
+          end_date?: string | null;
+          id?: string;
+          internship_type?: string;
+          role?: string;
+          start_date?: string | null;
+          status?: string;
+          student_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "internships_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "students"
-            referencedColumns: ["id"]
+            foreignKeyName: "internships_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       skills: {
         Row: {
-          category: string
-          created_at: string
-          id: string
-          name: string
-          proficiency: string
-          progress: number
-          student_id: string
-        }
+          category: string;
+          created_at: string;
+          id: string;
+          name: string;
+          proficiency: string;
+          progress: number;
+          student_id: string;
+        };
         Insert: {
-          category: string
-          created_at?: string
-          id?: string
-          name: string
-          proficiency: string
-          progress?: number
-          student_id: string
-        }
+          category: string;
+          created_at?: string;
+          id?: string;
+          name: string;
+          proficiency: string;
+          progress?: number;
+          student_id: string;
+        };
         Update: {
-          category?: string
-          created_at?: string
-          id?: string
-          name?: string
-          proficiency?: string
-          progress?: number
-          student_id?: string
-        }
+          category?: string;
+          created_at?: string;
+          id?: string;
+          name?: string;
+          proficiency?: string;
+          progress?: number;
+          student_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "skills_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "students"
-            referencedColumns: ["id"]
+            foreignKeyName: "skills_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       students: {
         Row: {
-          avatar_url: string | null
-          college: string | null
-          course: string | null
-          created_at: string
-          email: string
-          full_name: string
-          id: string
-          phone: string | null
-          updated_at: string
-          year: string | null
-        }
+          avatar_url: string | null;
+          college: string | null;
+          course: string | null;
+          created_at: string;
+          email: string;
+          full_name: string;
+          id: string;
+          phone: string | null;
+          updated_at: string;
+          year: string | null;
+        };
         Insert: {
-          avatar_url?: string | null
-          college?: string | null
-          course?: string | null
-          created_at?: string
-          email?: string
-          full_name?: string
-          id: string
-          phone?: string | null
-          updated_at?: string
-          year?: string | null
-        }
+          avatar_url?: string | null;
+          college?: string | null;
+          course?: string | null;
+          created_at?: string;
+          email?: string;
+          full_name?: string;
+          id: string;
+          phone?: string | null;
+          updated_at?: string;
+          year?: string | null;
+        };
         Update: {
-          avatar_url?: string | null
-          college?: string | null
-          course?: string | null
-          created_at?: string
-          email?: string
-          full_name?: string
-          id?: string
-          phone?: string | null
-          updated_at?: string
-          year?: string | null
-        }
-        Relationships: []
-      }
+          avatar_url?: string | null;
+          college?: string | null;
+          course?: string | null;
+          created_at?: string;
+          email?: string;
+          full_name?: string;
+          id?: string;
+          phone?: string | null;
+          updated_at?: string;
+          year?: string | null;
+        };
+        Relationships: [];
+      };
       user_roles: {
         Row: {
-          id: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
+          id: string;
+          role: Database["public"]["Enums"]["app_role"];
+          user_id: string;
+        };
         Insert: {
-          id?: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
+          id?: string;
+          role: Database["public"]["Enums"]["app_role"];
+          user_id: string;
+        };
         Update: {
-          id?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          user_id?: string
-        }
-        Relationships: []
-      }
-    }
+          id?: string;
+          role?: Database["public"]["Enums"]["app_role"];
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
       has_role: {
         Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
-    }
+          _role: Database["public"]["Enums"]["app_role"];
+          _user_id: string;
+        };
+        Returns: boolean;
+      };
+    };
     Enums: {
-      app_role: "admin" | "student"
-    }
+      app_role: "admin" | "student";
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">;
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">];
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
   TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
       DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R;
       }
       ? R
       : never
-    : never
+    : never;
 
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
+    keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
   TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
+        Insert: infer I;
       }
       ? I
       : never
-    : never
+    : never;
 
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
+    keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
   TableName extends (DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
+        Update: infer U;
       }
       ? U
       : never
-    : never
+    : never;
 
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
+    keyof DefaultSchema["Enums"] | { schema: keyof DatabaseWithoutInternals },
   EnumName extends (DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
+    : never;
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
+    keyof DefaultSchema["CompositeTypes"] | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
+    : never;
 
 export const Constants = {
   public: {
@@ -383,4 +371,4 @@ export const Constants = {
       app_role: ["admin", "student"],
     },
   },
-} as const
+} as const;
