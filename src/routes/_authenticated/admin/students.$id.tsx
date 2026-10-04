@@ -8,7 +8,7 @@ import { SkillBars } from "@/components/SkillChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { requireAdmin } from "@/lib/admin-guard";
-import { useAvatarUrl } from "@/routes/_authenticated/profile";
+import { useAvatarUrl } from "@/lib/avatar";
 
 export const Route = createFileRoute("/_authenticated/admin/students/$id")({
   beforeLoad: requireAdmin,

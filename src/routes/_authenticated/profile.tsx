@@ -8,20 +8,13 @@ import { AppShell, LoadingState } from "@/components/AppShell";
 import { FormField, zodErrors } from "@/components/AuthCard";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAvatarUrl } from "@/lib/avatar";
 import { profileSchema, YEARS } from "@/lib/schemas";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({ meta: [{ title: "My Profile — SkillTrack" }, { name: "description", content: "View and edit your profile." }] }),
   component: ProfilePage,
 });
-
-export function useAvatarUrl(path: string | null | undefined) {
-  return useQuery({
-    queryKey: ["avatar", path],
-    enabled: !!path,
-    queryFn: async () => (await supabase.storage.from("avatars").createSignedUrl(path!, 3600)).data?.signedUrl ?? null,
-  });
-}
 
 function ProfilePage() {
   const { user } = Route.useRouteContext();
