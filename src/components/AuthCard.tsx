@@ -28,7 +28,7 @@ export function AuthCard({ title, subtitle, children, footer }: {
 }
 
 export function FormField({ id, label, error, ...props }: {
-  id: string; label: string; error?: string;
+  id: string; label: string; error?: string | undefined;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="space-y-1.5">

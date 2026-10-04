@@ -21,7 +21,7 @@ export const Route = createFileRoute("/admin/login")({
 function AdminLoginPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(false);
 
   async function submit(e: React.FormEvent) {

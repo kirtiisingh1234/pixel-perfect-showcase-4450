@@ -54,7 +54,7 @@ export function ResourceManager({ table, singular, fields, schema, columns, defa
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Row | null>(null);
   const [form, setForm] = useState<Record<string, string>>(defaults);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, any>>({});
 
   const save = useMutation({
     mutationFn: async (values: Record<string, unknown>) => {

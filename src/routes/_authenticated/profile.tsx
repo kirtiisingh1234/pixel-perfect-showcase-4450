@@ -30,7 +30,7 @@ function ProfilePage() {
   const avatar = useAvatarUrl(p?.avatar_url);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ full_name: "", phone: "", college: "", course: "", year: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, any>>({});
 
   useEffect(() => {
     if (p) setForm({ full_name: p.full_name, phone: p.phone ?? "", college: p.college ?? "", course: p.course ?? "", year: p.year ?? "" });
@@ -46,11 +46,11 @@ function ProfilePage() {
   });
 
   async function upload(file: File) {
-    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file");
-    if (file.size > 2 * 1024 * 1024) return toast.error("Image must be under 2 MB");
+    if (!file.type.startsWith("image/")) { toast.error("Please choose an image file"); return; }
+    if (file.size > 2 * 1024 * 1024) { toast.error("Image must be under 2 MB"); return; }
     const path = `${user.id}/avatar-${Date.now()}.${file.name.split(".").pop()}`;
     const { error } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await supabase.from("students").update({ avatar_url: path }).eq("id", user.id);
     toast.success("Profile picture updated");
     qc.invalidateQueries({ queryKey: ["student"] });
